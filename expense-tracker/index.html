@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101511">
+  <meta name="description" content="Spendwise, a privacy-first personal expense tracker.">
+  <title>Spendwise — Monthly money, made clearer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="#overview"><span class="brand-mark">s<span>+</span></span><span>spendwise<small>YOUR MONEY, IN FOCUS</small></span></a>
+    <p class="nav-label">WORKSPACE</p>
+    <nav><a class="active" href="#overview"><span>◫</span> Overview</a><a href="#transactions"><span>↕</span> Transactions</a><a href="#budgets"><span>◷</span> Budgets</a></nav>
+    <div class="sidebar-bottom"><div class="privacy"><span>⌑</span><div><b>Your data stays yours</b><small>Saved on this device only</small></div></div><div class="profile"><div class="avatar">MP</div><div><b>Mahi Patel</b><small>PERSONAL SPACE</small></div><span class="more">···</span></div></div>
+  </aside>
+  <main class="main" id="overview">
+    <header class="topbar"><div><span class="breadcrumb">PERSONAL WORKSPACE</span><span class="slash">/</span><b>Overview</b></div><div class="top-actions"><button class="secondary" id="settingsBtn">Edit salary &amp; budgets</button><button class="icon-btn" id="exportBtn" title="Download transactions as CSV" aria-label="Export CSV">⇩</button><button class="primary" id="openForm">＋ <span>Add transaction</span></button></div></header>
+    <section class="welcome"><div><p class="eyebrow"><span></span> YOUR MONTH AT A GLANCE</p><h1>Money, with a little <em>more clarity.</em></h1><p class="subhead">A calm view of what came in, what went out, and what’s still yours to plan.</p></div><label class="month-select">PERIOD <select id="monthSelect" aria-label="Select month"></select></label></section>
+    <section class="summary-grid" aria-label="Monthly summary">
+      <article class="summary-card balance-card"><div class="card-top"><span>LEFT AFTER SPENDING</span><span class="card-icon">◈</span></div><strong id="leftValue">$0.00</strong><p><span class="trend">↗</span> <b id="leftPercent">—</b> of your income remains</p><div class="progress"><i id="leftBar"></i></div><div class="progress-label"><span>Spent <b id="spentLabel">$0</b></span><span>Income <b id="incomeLabel">$0</b></span></div></article>
+      <article class="summary-card"><div class="card-top"><span>SALARY + OTHER INCOME</span><span class="card-icon">↙</span></div><strong id="incomeValue">$0.00</strong><p class="muted">Salary plan + <b id="incomeCount">0</b> other entries</p><div class="mini-bars income-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></article>
+      <article class="summary-card"><div class="card-top"><span>SPENDING</span><span class="card-icon coral">↗</span></div><strong id="spentValue">$0.00</strong><p class="muted"><b id="transactionCount">0</b> purchases tracked</p><div class="mini-bars spend-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></article>
+      <article class="summary-card"><div class="card-top"><span>SAFE TO SPEND / WEEK</span><span class="card-icon violet">⌁</span></div><strong id="weeklyValue">$0.00</strong><p class="muted">Based on what remains this month</p><div class="week-note"><span>MONTH PLAN</span><b id="weekDates">—</b></div></article>
+    </section>
+    <section class="content-grid">
+      <article class="panel spending-panel"><div class="panel-heading"><div><p class="eyebrow">SPENDING PATTERN</p><h2>Where it’s going</h2></div><button id="rangeToggle" class="text-button">THIS MONTH <span>⌄</span></button></div><div class="chart-wrap"><div class="donut" id="donut"><div class="donut-center"><span>OUTFLOW</span><b id="donutTotal">$0</b><small>this month</small></div></div><div id="legend" class="legend"></div></div><div class="insight"><span class="insight-icon">✳</span><p><b id="insightTitle">A useful observation</b><small id="insightText">Your spending insights will show here.</small></p><span class="insight-arrow">↗</span></div></article>
+      <article class="panel budget-panel" id="budgets"><div class="panel-heading"><div><p class="eyebrow">A PLAN THAT FLEXES</p><h2>Budget pace</h2></div><button type="button" class="text-button" id="editPlanBtn">EDIT PLAN <span>↗</span></button></div><div class="budget-list" id="budgetList"></div><div class="budget-footer"><span class="budget-dot"></span> <span>Each month has its own salary and limits</span><b>›</b></div></article>
+    </section>
+    <section class="panel transactions-panel" id="transactions"><div class="panel-heading transaction-heading"><div><p class="eyebrow">THE LITTLE DETAILS</p><h2>Recent activity</h2></div><div class="table-actions"><label class="search"><span>⌕</span><input id="searchInput" placeholder="Find a transaction" aria-label="Find a transaction"></label><select id="categoryFilter" aria-label="Filter by category"><option value="all">All categories</option></select><button id="allTransactions" class="text-button">VIEW ALL <span>↗</span></button></div></div><div class="transaction-table"><div class="table-head"><span>TRANSACTION</span><span>CATEGORY</span><span>DATE</span><span>AMOUNT</span></div><div id="transactionRows"></div></div></section>
+    <footer><span>SPENDWISE <i>✳</i> A PERSONAL MONEY TRACKER</span><button id="resetData">CLEAR MY DATA</button><span>YOUR DATA STAYS IN THIS BROWSER</span></footer>
+  </main>
+  <dialog id="transactionDialog"><form id="transactionForm"><div class="dialog-head"><div><p class="eyebrow">YOUR TRANSACTIONS</p><h2 id="transactionDialogTitle">Add transaction</h2></div><button type="button" class="close-btn" id="closeForm" aria-label="Close">×</button></div><label>Description<input name="description" required maxlength="50" placeholder="e.g. Coffee with a friend"></label><div class="form-row"><label>Amount (CAD)<input name="amount" type="number" required min="0.01" step="0.01" placeholder="0.00"></label><label>Type<select name="type"><option value="expense">Expense</option><option value="income">Other income</option></select></label></div><div class="form-row"><label id="categoryField">Category<select name="category"><option>Food &amp; Drink</option><option>Home</option><option>Transport</option><option>Shopping</option><option>Health</option><option>Fun</option><option>Other</option></select></label><label>Date<input name="date" type="date" required></label></div><label class="note-label">A note, if you like<input name="note" maxlength="90" placeholder="What would you like to remember?"></label><div class="dialog-actions"><button type="button" class="cancel-btn" id="cancelForm">Cancel</button><button class="primary" type="submit" id="saveTransaction">Save transaction <span>↗</span></button></div><p class="form-note">Your entries are saved in this browser. The CSV export covers this month's transactions.</p></form></dialog>
+  <dialog id="settingsDialog"><form id="settingsForm"><div class="dialog-head"><div><p class="eyebrow">MAKE THE PLAN YOURS</p><h2>Monthly plan</h2></div><button type="button" class="close-btn" id="closeSettings" aria-label="Close">×</button></div><label class="salary-field">Monthly take-home salary (CAD)<input id="salaryInput" name="salary" type="number" min="0" step="0.01" placeholder="0.00"></label><p class="settings-help">Add extra income, like a bonus, as a separate transaction.</p><h3 class="budget-form-title">Category spending limits <span>CAD / month</span></h3><div class="budget-input-list" id="budgetInputs"></div><div class="dialog-actions"><button type="button" class="cancel-btn" id="cancelSettings">Cancel</button><button class="primary" type="submit">Save monthly plan <span>↗</span></button></div><p class="form-note">Each month has its own salary plan and category limits.</p></form></dialog>
+  <script src="app.js"></script>
+</body>
+</html>
